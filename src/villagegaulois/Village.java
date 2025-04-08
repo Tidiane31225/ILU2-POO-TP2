@@ -1,5 +1,6 @@
 package villagegaulois;
 
+//TP2
 import personnages.Chef;
 import personnages.Druide;
 import personnages.Gaulois;
@@ -31,6 +32,11 @@ public class Village {
 			nbVillageois++;
 		}
 	}
+	
+	public Etal[] rechercherEtalsProduit(String produit) {
+	    return marche.trouverEtals(produit);
+	}
+
 
 	public Gaulois trouverHabitant(String nomGaulois) {
 		Gaulois gaulois = null;
@@ -138,7 +144,7 @@ public class Village {
 		 */
 		private int trouverEtalLibre() {
 			int indiceEtalLibre = -1;
-			for (int i = 0; i < etals.length && indiceEtalLibre < 0; i++) {
+			for (int i = 1; i < etals.length+1 && indiceEtalLibre < 0; i++) {
 				if (!etals[i].isEtalOccupe()) {
 					indiceEtalLibre = i;
 				}

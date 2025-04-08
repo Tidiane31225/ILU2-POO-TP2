@@ -11,10 +11,6 @@ public class ControlEmmenager {
 		this.village = village;
 	}
 
-	public boolean isHabitant(String nom) {
-		return village.trouverHabitant(nom) != null;
-	}
-
 	public void ajouterDruide(String nom, int force, int effetPotionMin,
 			int effetPotionMax) {
 		Druide druide = new Druide(nom, force, effetPotionMin, effetPotionMax);
@@ -26,5 +22,10 @@ public class ControlEmmenager {
 		Gaulois gaulois = new Gaulois(nom, force);
 		village.ajouterHabitant(gaulois);
 	}
+	
+	public boolean isHabitant(String nom) {
+		return village.trouverHabitant(nom) != null;
+	}
+
 
 }

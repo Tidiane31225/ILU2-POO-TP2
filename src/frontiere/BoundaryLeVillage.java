@@ -1,9 +1,12 @@
 package frontiere;
 
+import java.util.Scanner;
+
 public class BoundaryLeVillage {
 
 	private BoundaryPrendreEtal boundaryChercherEtal;
 	private BoundaryLibererEtal boundaryLibererEtal;
+	private Scanner scan = new Scanner(System.in);
 	private BoundaryAfficherMarche boundaryAfficherMarche;
 	private BoundaryAcheterProduit boundaryAcheterProduit;
 	private BoundaryEmmenager boundaryEmmenager;
@@ -35,7 +38,8 @@ public class BoundaryLeVillage {
 			question.append("4 - quitter l'application");
 			choixUtilisateur = Clavier.entrerEntier(question.toString());
 			if (choixUtilisateur > 0 && choixUtilisateur < 4) {
-				String nom = Clavier.entrerChaine("Quel est votre nom ?");
+				System.out.println("Quel est votre nom ?");
+				String nom = scan.next();
 				switch (choixUtilisateur) {
 				case 1:
 					menuVoyageur(nom);
@@ -59,31 +63,37 @@ public class BoundaryLeVillage {
 	}
 
 	private void menuVoyageur(String nom) {
-		int choixUtilisateur;
-		do {
-			StringBuilder question = new StringBuilder();
-			question.append(
-					"1 - je souhaite que vous me présentiez votre village.\n");
-			question.append("2 - je voudrais emménager dans votre village.\n");
-			question.append("3 - quitter l'application.");
-			choixUtilisateur = Clavier.entrerEntier(question.toString());
-			switch (choixUtilisateur) {
-			case 1:
-				boundaryAfficherVillage.afficherVillage();
-				break;
-			case 2:
-				boundaryEmmenager.emmenager(nom);
-				break;
-			case 3:
-				System.out.println("Au revoir voyageur " + nom);
-				break;
-			default:
-				System.out.println("Vous devez entrer un chiffre entre 1 et 3");
-				break;
-			}
-			System.out.println();
-		} while (choixUtilisateur != 3);
+	    int choixUtilisateur;
+	    do {
+	        StringBuilder question = new StringBuilder();
+	        question.append("1 - je souhaite que vous me présentiez votre village.\n");
+	        question.append("2 - je voudrais emménager dans votre village.\n");
+	        question.append("3 - quitter l'application.\n");
+	        
+	        choixUtilisateur = Clavier.entrerEntier(question.toString());
+	        
+	        switch (choixUtilisateur) {
+	            case 1:
+	                boundaryAfficherVillage.afficherVillage();
+	                break;
+	            case 2:
+	                if (boundaryEmmenager.isHabitant(nom)) {
+	                    System.out.println("Mais vous êtes déjà un habitant du village !");
+	                } else {
+	                    boundaryEmmenager.emmenager(nom);
+	                }
+	                break;
+	            case 3:
+	                System.out.println("Au revoir voyageur " + nom);
+	                break;
+	            default:
+	                System.out.println("Vous devez entrer un chiffre entre 1 et 3");
+	                break;
+	        }
+	        System.out.println();
+	    } while (choixUtilisateur != 3);
 	}
+
 
 	private void menuMarchand(String nom) {
 		int choixUtilisateur = 0;
